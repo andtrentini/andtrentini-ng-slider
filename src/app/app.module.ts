@@ -10,4 +10,4 @@ import { SliderComponent } from './slider/slider.component';
   declarations: [ AppComponent, SliderComponent ],
   bootstrap:    [ AppComponent ]
 })
-export class AppModule { }
+export class AppModule { } 
