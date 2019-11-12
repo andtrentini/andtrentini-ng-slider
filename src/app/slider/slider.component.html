@@ -1,6 +1,22 @@
-<div class="container-fluid">
-  <div class="jumbotron jumbotron-fluid">
-    <p class="display-4">Slider</p>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+  <p class="display-4">Slider</p>
   </div>
 </div>
-<img [src]="imageUrls[0]">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <button class="btn btn-primary btn-lg btn-block" (click)="onPrevClick()">Prev</button>
+    </div>
+        <div class="col-sm-4">
+      <button class="btn btn-primary btn-lg btn-block" (click)="onAutoStopClick()">{{mode}}</button>
+    </div>
+        <div class="col-sm-4">
+      <button class="btn btn-primary btn-lg btn-block" (click)="onNextClick()">Next</button>
+    </div>
+  </div>
+  <br>
+  <div class="container center">
+    <img class="img-fluid" [src]="imageUrls[current]">
+  </div>
+</div>

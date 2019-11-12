@@ -6,6 +6,12 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./slider.component.css"]
 })
 export class SliderComponent implements OnInit {
+
+  current: number = 0;
+  interval: number = 2000
+  timer;
+  mode: string = 'auto';
+
   imageUrls: String[] = [
     "https://themes.tielabs.com/qamar/wp-content/uploads/2012/12/4652641178_dcc614bb1f_b-480x360.jpg",
     "https://www.donnamoderna.com/wp-content/uploads/2019/11/BERLIN_WALL-480x360.jpg",
@@ -23,4 +29,34 @@ export class SliderComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  onPrevClick() {
+    if (this.current == 0) {
+      this.current = this.imageUrls.length-1;
+    }
+    else {
+      this.current--;
+    }
+  }
+  onNextClick() {
+    if (this.current == this.imageUrls.length-1) {
+      this.current = 0;
+    }
+    else {
+      this.current++;
+    }
+  }
+  
+  onAutoStopClick() {
+    if (this.mode == 'auto') {
+       this.mode = 'stop';
+      this.timer = setInterval(() => {
+        this.onNextClick();
+      }, this.interval);     
+    }
+    else {
+      this.mode = 'auto';
+      clearInterval(this.timer);     
+    }
+  }
 }
