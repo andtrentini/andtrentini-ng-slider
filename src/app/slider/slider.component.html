@@ -4,7 +4,7 @@
 			<button class="btn btn-primary btn-lg btn-block" (click)="onPrevClick()">Prev</button>
 		</div>
 		<div class="col-sm-4">
-			<button class="btn btn-primary btn-lg btn-block" (click)="onAutoStopClick()">{{mode}}</button>
+			<button class="btn btn-primary btn-lg btn-block" (click)="onAutoStopClick()">{{nextMode}}</button>
 		</div>
 		<div class="col-sm-4">
 			<button class="btn btn-primary btn-lg btn-block" (click)="onNextClick()">Next</button>
@@ -12,8 +12,18 @@
 	</div>
 	<br>
 	<div class="row">
-		<div class="col-12">
-			<img class="rounded mx-auto d-block img-thumbnail img-fluid" [src]="imageUrls[current]">
-  </div>
-		</div>
+	  <div class="col-12">
+	    <img class="rounded mx-auto d-block img-thumbnail img-fluid" [src]="imageUrls[current]">
+    </div>
 	</div>
+  <br />
+	<div class="row">
+	  <div class="col-12">
+	    <div class="form-group">
+        <label for="formControlRange">Select speed</label>
+        <input type="range" class="form-control-range" id="formControlRange" [min]="minInterval" 
+          [max]="maxInterval" [value]="currentInterval" (change)="onChangeTimeInterval($event)">
+      </div>
+    </div>
+	</div>
+</div>

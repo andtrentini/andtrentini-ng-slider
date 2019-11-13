@@ -8,15 +8,16 @@ import { Component, OnInit } from "@angular/core";
 export class SliderComponent implements OnInit {
 
   current: number = 0;
-  interval: number = 2000
+  minInterval: number = 100;
+  maxInterval: number = 5000;
+  currentInterval: number = 2000;
   timer;
-  mode: string = 'auto';
+  nextMode: string = 'auto';
 
   imageUrls: String[] = [
     "https://themes.tielabs.com/qamar/wp-content/uploads/2012/12/4652641178_dcc614bb1f_b-480x360.jpg",
     "https://www.donnamoderna.com/wp-content/uploads/2019/11/BERLIN_WALL-480x360.jpg",
     "https://www.brokerleader.it/wp-content/uploads/2019/06/rischi-tecnologici-3-480x360.jpg",
-    "https://www.donnamoderna.com/wp-content/uploads/2015/04/shutterstock_476301484-480x360.jpg",
     "https://media.crimewatchdaily.com/2016/11/02/la-tease-480x360-1.jpg",
     "https://www.greatlakesnow.org/wp-content/uploads/2014/03/DetroitSkyline-480x360.jpg",
     "https://stophavingaboringlife.com/wp-content/uploads/2019/05/best-cities-to-visit-in-France-Paris-480x360.jpeg",
@@ -48,15 +49,27 @@ export class SliderComponent implements OnInit {
   }
   
   onAutoStopClick() {
-    if (this.mode == 'auto') {
-       this.mode = 'stop';
+    if (this.nextMode == 'auto') {
+       this.nextMode = 'stop';
       this.timer = setInterval(() => {
         this.onNextClick();
-      }, this.interval);     
+      }, this.currentInterval);     
     }
     else {
-      this.mode = 'auto';
+      this.nextMode = 'auto';
       clearInterval(this.timer);     
     }
   }
+
+  onChangeTimeInterval(htmlElement: HTMLInputElement) {    
+    this.currentInterval = (<HTMLInputElement>htmlElement).srcElement.value;
+    
+    if (this.nextMode == 'stop') {      
+      clearInterval(this.timer);     
+      this.timer = setInterval(() => {
+          this.onNextClick();
+      },  this.currentInterval);     
+    }
+  }
+
 }
